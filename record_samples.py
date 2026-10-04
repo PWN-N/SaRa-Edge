@@ -7,7 +7,7 @@ DURATION = 2
 CHANNELS = 1
 DEVICE = 1
 
-OUTPUT_DIR = "dataset/keyword"
+OUTPUT_DIR = "dataset/noise"
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 

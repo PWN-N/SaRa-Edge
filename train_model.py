@@ -228,17 +228,130 @@ print(
 )
 
 
+# # ============================================================
+# # BUILD CNN
+# # ============================================================
+
+# model = tf.keras.Sequential([
+
+#     tf.keras.layers.Input(
+#         shape=(X_train.shape[1],
+#                X_train.shape[2],
+#                X_train.shape[3])
+#     ),
+
+
 # ============================================================
-# BUILD CNN
+# BUILD DS-CNN
 # ============================================================
 
 model = tf.keras.Sequential([
 
     tf.keras.layers.Input(
-        shape=(X_train.shape[1],
-               X_train.shape[2],
-               X_train.shape[3])
+        shape=(
+            X_train.shape[1],
+            X_train.shape[2],
+            X_train.shape[3]
+        )
     ),
+
+    # --------------------------------------------------------
+    # DS-CNN BLOCK 1
+    # --------------------------------------------------------
+
+    tf.keras.layers.DepthwiseConv2D(
+        (3, 3),
+        padding="same"
+    ),
+
+    tf.keras.layers.BatchNormalization(),
+
+    tf.keras.layers.ReLU(),
+
+    tf.keras.layers.Conv2D(
+        16,
+        (1, 1),
+        padding="same"
+    ),
+
+    tf.keras.layers.BatchNormalization(),
+
+    tf.keras.layers.ReLU(),
+
+    tf.keras.layers.MaxPooling2D(
+        (2, 2)
+    ),
+
+    # --------------------------------------------------------
+    # DS-CNN BLOCK 2
+    # --------------------------------------------------------
+
+    tf.keras.layers.DepthwiseConv2D(
+        (3, 3),
+        padding="same"
+    ),
+
+    tf.keras.layers.BatchNormalization(),
+
+    tf.keras.layers.ReLU(),
+
+    tf.keras.layers.Conv2D(
+        32,
+        (1, 1),
+        padding="same"
+    ),
+
+    tf.keras.layers.BatchNormalization(),
+
+    tf.keras.layers.ReLU(),
+
+    tf.keras.layers.MaxPooling2D(
+        (2, 2)
+    ),
+
+    # --------------------------------------------------------
+    # DS-CNN BLOCK 3
+    # --------------------------------------------------------
+
+    tf.keras.layers.DepthwiseConv2D(
+        (3, 3),
+        padding="same"
+    ),
+
+    tf.keras.layers.BatchNormalization(),
+
+    tf.keras.layers.ReLU(),
+
+    tf.keras.layers.Conv2D(
+        64,
+        (1, 1),
+        padding="same"
+    ),
+
+    tf.keras.layers.BatchNormalization(),
+
+    tf.keras.layers.ReLU(),
+
+    # --------------------------------------------------------
+    # CLASSIFIER
+    # --------------------------------------------------------
+
+    tf.keras.layers.GlobalAveragePooling2D(),
+
+    tf.keras.layers.Dense(
+        32,
+        activation="relu"
+    ),
+
+    tf.keras.layers.Dropout(
+        0.30
+    ),
+
+    tf.keras.layers.Dense(
+        3,
+        activation="softmax"
+    )
+])
 
     # --------------------------------------------------------
     # CNN BLOCK 1
