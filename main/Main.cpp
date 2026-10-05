@@ -965,7 +965,7 @@ static void capture_audio(int16_t *audio_buffer)
 {
     size_t bytes_read = 0;
 
-    int32_t raw_buffer[I2S_READ_SAMPLES];
+    static int32_t raw_buffer[I2S_READ_SAMPLES];
 
     int sample_index = 0;
 
