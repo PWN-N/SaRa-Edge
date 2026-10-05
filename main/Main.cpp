@@ -67,7 +67,7 @@ static i2s_chan_handle_t rx_handle = NULL;
 
 // Temporary arena for first measurement.
 // We will reduce this after measuring arena_used_bytes().
-#define TENSOR_ARENA_SIZE (128 * 1024)
+#define TENSOR_ARENA_SIZE (32 * 1024)
 
 alignas(16) static uint8_t tensor_arena[TENSOR_ARENA_SIZE];
 
